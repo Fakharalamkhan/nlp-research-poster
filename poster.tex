@@ -1,0 +1,321 @@
+% Research poster (DIN A1 portrait, 594 x 841 mm), NLP module
+% All numbers come from ../confidence-gated-self-correction/results (summary.json, tables/*.csv)
+% and the paper text; see numbers_sources.md.
+\documentclass[final]{beamer}
+\usepackage[size=custom,width=59.4,height=84.1,scale=1.0]{beamerposter}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usefonttheme{professionalfonts}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\pgfplotsset{barlegend/.style={legend image code/.code={\fill[#1] (0mm,-3mm) rectangle (9mm,5mm);}}}
+\usepackage{qrcode}
+\urlstyle{same}
+
+% No sub- or superscript may drop below 24 pt
+\DeclareMathSizes{24.5}{24.5}{24.5}{24.5}
+\DeclareMathSizes{25}{25}{24.5}{24.5}
+\DeclareMathSizes{26}{26}{24.5}{24.5}
+\DeclareMathSizes{28}{28}{24.5}{24.5}
+\DeclareMathSizes{32}{32}{24.5}{24.5}
+\DeclareMathSizes{36}{36}{26}{24.5}
+\DeclareMathSizes{40}{40}{28}{24.5}
+\DeclareMathSizes{44}{44}{31}{24.5}
+\DeclareMathSizes{48}{48}{34}{24.5}
+\DeclareMathSizes{56}{56}{40}{28}
+\DeclareMathSizes{80}{80}{56}{40}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+\setbeamersize{text margin left=0mm, text margin right=0mm}
+
+% ---------- colours ----------
+\definecolor{headerblue}{HTML}{1E3A5F}
+\definecolor{textdark}{HTML}{1F2937}
+\definecolor{boxbody}{HTML}{EEF2F7}
+\definecolor{accent}{HTML}{E07A1F}      % take-home background, card edges, diagram accent
+\definecolor{accenttext}{HTML}{B45309}  % same hue, darker: key numbers and bullets on light backgrounds (>= 4.4:1)
+\definecolor{gsm}{HTML}{2563EB}
+\definecolor{hot}{HTML}{DC2626}
+\definecolor{okgreen}{HTML}{15803D}
+\definecolor{nored}{HTML}{DC2626}
+\definecolor{chancegray}{HTML}{4B5563}
+\setbeamercolor{normal text}{fg=textdark,bg=white}
+
+% ---------- type sizes ----------
+\newcommand{\fsBody}{\fontsize{28}{34}\selectfont}
+\newcommand{\fsTab}{\fontsize{26}{32}\selectfont}
+\newcommand{\fsCap}{\fontsize{24.5}{29.5}\selectfont}
+\newcommand{\fsSub}{\fontsize{32}{38}\selectfont\bfseries}
+\newcommand{\fsKey}{\fontsize{56}{62}\selectfont\bfseries}
+\newcommand{\fsBig}{\fontsize{36}{42}\selectfont}
+
+% ---------- layout (mm) ----------
+\newlength{\margin}\setlength{\margin}{20mm}
+\newlength{\gap}\setlength{\gap}{15mm}
+\newlength{\headH}\setlength{\headH}{146mm}
+\newlength{\takeH}\setlength{\takeH}{36mm}
+\newlength{\colH}
+\setlength{\colH}{\dimexpr 841mm-\headH-\gap-\gap-\takeH-\margin\relax}
+\newlength{\wA}\setlength{\wA}{150mm}
+\newlength{\wB}\setlength{\wB}{157mm}
+\newlength{\wC}\setlength{\wC}{217mm}
+
+% ---------- building blocks ----------
+\newcommand{\sub}[1]{\par\noindent{\fsSub\color{headerblue}#1}\par\vspace{2mm}}
+\newcommand{\bul}[1]{\par\noindent\hangindent=1.0em\hangafter=1\makebox[1.0em][l]{\textcolor{accenttext}{\textbullet}}#1\par\vspace{2mm}}
+\newcommand{\secnum}[1]{\tikz[baseline=(n.base)]\node[circle,fill=white,text=headerblue,minimum size=18mm,inner sep=0pt,font=\fontsize{44}{44}\selectfont\bfseries](n){#1};}
+\newcommand{\Sv}{S_{\text{verb}}}
+\newcommand{\Ssc}{S_{\text{sc}}}
+\newcommand{\Sf}{S_{\text{verif}}}
+\newcommand{\repo}{https://github.com/Fakharalamkhan/confidence-gated-self-correction}
+
+\tcbset{
+  section/.style={enhanced, colback=boxbody, colframe=boxbody, boxrule=0pt, arc=8mm,
+    colbacktitle=headerblue, coltitle=white, fonttitle=\fontsize{48}{56}\selectfont\bfseries,
+    toptitle=3.5mm, bottomtitle=3.5mm, lefttitle=7mm, left=8mm, right=8mm, top=7mm, bottom=7mm,
+    height=\colH},
+  card/.style={enhanced, colback=white, colframe=white, boxrule=0pt, arc=5mm,
+    borderline west={3mm}{0pt}{accent}, left=6mm, right=3mm, top=3.5mm, bottom=3.5mm,
+    before skip=0pt, after skip=4mm, before upper=\raggedright},
+  panel/.style={enhanced, colback=white, colframe=white, boxrule=0pt, arc=5mm,
+    left=5mm, right=5mm, top=4mm, bottom=4mm, before skip=0pt, after skip=0pt},
+}
+
+\newcommand{\badgeyes}{\tikz[baseline=-2.4mm]{\fill[okgreen] (0,0) circle (7.5mm);
+    \draw[white,line width=2.2mm,line cap=round,line join=round] (-3.6mm,0.2mm) -- (-1mm,-3mm) -- (4mm,3mm);}}
+\newcommand{\badgeno}{\tikz[baseline=-2.4mm]{\fill[nored] (0,0) circle (7.5mm);
+    \draw[white,line width=2.2mm,line cap=round] (-3mm,-3mm) -- (3mm,3mm) (-3mm,3mm) -- (3mm,-3mm);}}
+\newcommand{\verdict}[2]{\par\noindent\begin{minipage}[t]{17mm}\vspace{0pt}#1\end{minipage}%
+  \begin{minipage}[t]{\dimexpr\linewidth-17mm\relax}\vspace{-1.2mm}\raggedright #2\end{minipage}\par\vspace{6mm}}
+
+\newsavebox{\boxHead}\newsavebox{\boxA}\newsavebox{\boxB}\newsavebox{\boxC}\newsavebox{\boxTake}
+
+\begin{document}
+\begin{frame}[t,plain]
+
+% ===================== HEADER =====================
+\sbox{\boxHead}{\begin{minipage}[t]{462mm}\raggedright\color{white}
+  {\fontsize{80}{86}\selectfont\bfseries Knowing When to Revise:\\ Confidence-Gated\\ Self-Correction in LLMs\par}
+  \vspace{6mm}
+  {\fontsize{36}{42}\selectfont Fakhr E Alam Khan \enspace$\cdot$\enspace Matriculation No.\ 1818211 \enspace$\cdot$\enspace University of Trier\par}
+  \vspace{2mm}
+  {\fontsize{28}{34}\selectfont \href{\repo}{github.com/Fakharalamkhan/confidence-gated-self-correction}\par}
+\end{minipage}}
+
+% ===================== 1 HYPOTHESIS =====================
+\sbox{\boxA}{\begin{minipage}[t]{\wA}
+\begin{tcolorbox}[section, title={\secnum{1}\hspace{5mm}Hypothesis}]
+\begin{minipage}[t][\tcbtextheight][s]{\linewidth}\fsBody\color{textdark}\raggedright
+\sub{Problem}
+\bul{Intrinsic self-critique often turns right answers into wrong ones~[1,\,2].}
+\vfill
+\sub{Idea}
+Revise only if the confidence in $A_0$ is low:\par\vspace{3mm}
+\begin{tcolorbox}[panel, halign=center]
+{\fsBig\bfseries\color{accenttext} revise $\Leftrightarrow S(A_0) < \tau$}
+\end{tcolorbox}
+\vfill
+\sub{RQs and hypotheses}
+\begin{tcolorbox}[card]{\color{headerblue}\bfseries RQ1}\enspace Does a gate beat never- and always-revise?\par\vspace{1mm}
+{\color{accenttext}\bfseries H1}\enspace Yes, it beats both.\end{tcolorbox}
+\begin{tcolorbox}[card]{\color{headerblue}\bfseries RQ2}\enspace Which signal best finds wrong answers?\par\vspace{1mm}
+{\color{accenttext}\bfseries H2}\enspace Self-consistency.\end{tcolorbox}
+\begin{tcolorbox}[card, after skip=0pt]{\color{headerblue}\bfseries RQ3}\enspace How large can the gain of a gate be?\par\vspace{1mm}
+{\color{accenttext}\bfseries H3}\enspace It is capped by the fix rate~$f$:\par\vspace{4mm}
+  {\fsBig$\begin{aligned}\mathrm{Acc} &= a + (1{-}a)\,f\,t\\ &\quad - a\,b\,u\end{aligned}$\par}\vspace{4mm}
+  {\fsCap
+  \begin{tabular}{@{}l@{\hspace{4mm}}>{\raggedright\arraybackslash}p{\dimexpr\linewidth-12mm\relax}@{}}
+  $a$ & initial accuracy\\
+  $f$ & fix rate\\
+  $t$ & share of wrong answers revised\\
+  $b$ & break rate\\
+  $u$ & share of right answers revised
+  \end{tabular}\par}\vspace{3mm}
+  Ceiling on the gain: {\bfseries\color{accenttext}$(1{-}a)\,f$}
+\end{tcolorbox}
+\vfill
+\sub{Prior work}
+\bul{IoE: keep or revise inside one prompt~[3]}
+\bul{Confidence vs.\ critique ability~[4]}
+\bul{P(True) self-verification~[5]}
+\bul{Self-consistency by sampling~[6]}
+\bul{New here: explicit threshold gates, tuned on held-out data}
+\end{minipage}
+\end{tcolorbox}
+\end{minipage}}
+
+% ===================== 2 METHODOLOGY =====================
+\sbox{\boxB}{\begin{minipage}[t]{\wB}
+\begin{tcolorbox}[section, title={\secnum{2}\hspace{5mm}Methodology}]
+\begin{minipage}[t][\tcbtextheight][s]{\linewidth}\fsBody\color{textdark}\raggedright
+\sub{Pipeline}
+{\centering
+\begin{tikzpicture}[
+  pstep/.style={draw=headerblue, line width=1mm, rounded corners=4mm, fill=white, text width=112mm,
+    align=center, minimum height=15mm, font=\fsBody},
+  pdec/.style={diamond, aspect=2.2, draw=accent, line width=1mm, fill=white, align=center,
+    inner sep=0.5mm, font=\fsBody},
+  pout/.style={draw=headerblue, line width=1mm, rounded corners=4mm, fill=white, text width=44mm,
+    align=center, minimum height=22mm, font=\fsBody},
+  parr/.style={-{Stealth[length=7mm,width=6mm]}, line width=1mm, color=headerblue},
+  plab/.style={font=\fsCap\bfseries, text=headerblue}]
+\node[pstep] (q) {Question};
+\node[pstep, below=7mm of q] (a0) {First answer $A_0$};
+\node[pstep, below=7mm of a0] (s) {Confidence $S(A_0)$};
+\node[pdec, below=7mm of s] (d) {$S(A_0) < \tau$\,?};
+\node[pout, anchor=north west] (rev) at ([yshift=-10mm]d.south -| q.west) {Revise:\\ output $A_1$};
+\node[pout, anchor=north east] (keep) at ([yshift=-10mm]d.south -| q.east) {Keep $A_0$};
+\draw[parr] (q) -- (a0);
+\draw[parr] (a0) -- (s);
+\draw[parr] (s) -- (d);
+\draw[parr] (d.west) -| node[plab, left, pos=0.75] {yes} (rev.north);
+\draw[parr] (d.east) -| node[plab, right, pos=0.75] {no} (keep.north);
+\end{tikzpicture}\par}
+\vfill
+\sub{Setup and why}
+\bul{Qwen2.5-7B-Instruct~[9]: open, fits 2$\times$ NVIDIA T4 with vLLM~[10]}
+\bul{GSM8K~[7] (math), HotpotQA~[8] (multi-hop QA): answers checked automatically}
+\bul{100 dev / 400 test each: $\tau$ never tuned on test}
+\vfill
+\sub{Signals}
+One from each family in prior work:\par\vspace{2mm}
+\bul{Verbalised confidence $\Sv$}
+\bul{Self-consistency $\Ssc$, $N{=}10$ samples~[6]}
+\bul{P(True) $\Sf$~[5]}
+\vfill
+\sub{Baselines, metrics}
+\bul{Never, always, majority vote, IoE~[3]; oracle as upper bound}
+\bul{Majority vote as revision step: a step that does fix errors}
+\bul{$W{\to}R$ / $R{\to}W$ instead of net accuracy}
+\bul{AUROC, token cost; paired exact McNemar test}
+\vfill
+\sub{Code and data}
+{\fsTab\href{\repo}{github.com/\allowbreak Fakharalamkhan/\allowbreak confidence-gated-\allowbreak self-correction}\par}
+
+\end{minipage}
+\end{tcolorbox}
+\end{minipage}}
+
+% ===================== 3 RESULTS =====================
+\sbox{\boxC}{\begin{minipage}[t]{\wC}
+\begin{tcolorbox}[section, title={\secnum{3}\hspace{5mm}Results}]
+\begin{minipage}[t][\tcbtextheight][s]{\linewidth}\fsBody\color{textdark}\raggedright
+\sub{(a) Always revise: transitions}
+{\centering\fsTab
+\setlength{\tabcolsep}{3.2mm}\begin{tabular}{@{}lccccc@{}}
+\toprule
+Dataset & $W{\to}R$ & $R{\to}W$ & $f$ & $b$ & $\kappa$\\
+\midrule
+GSM8K    & 0 & 1  & 0.000 & 0.003 & $\infty$\\
+HotpotQA & 6 & 21 & 0.036 & 0.089 & 3.50\\
+\bottomrule
+\end{tabular}\par}
+\vspace{1mm}{\fsCap 400 test questions per dataset; $\kappa$ = breaks per fix.\par}
+\vfill
+\sub{(b) AUROC per signal}
+{\centering
+\begin{tikzpicture}
+\begin{axis}[
+  width=170mm, height=56mm, scale only axis,
+  ybar=6mm, bar width=14mm, ymin=0, ymax=1.12, enlarge x limits=0.17,
+  symbolic x coords={verb,sc,verif,avg}, xtick=data,
+  xticklabels={$\Sv$,$\Ssc$,$\Sf$,$S_{\text{avg}}$},
+  ytick={0,0.5,1}, yticklabels={0,0.5,1},
+  axis x line*=bottom, axis y line*=left, axis line style={line width=3pt},
+  major tick style={line width=3pt}, major tick length=4mm, x tick style={draw=none},
+  tick label style={font=\fsTab},
+  nodes near coords, nodes near coords style={font=\fsCap, text=textdark},
+  point meta=explicit symbolic,
+  legend style={font=\fsTab, draw=none, fill=none, at={(0.5,1.0)}, anchor=south, legend columns=3,
+    /tikz/every even column/.append style={column sep=8mm}},
+  barlegend,
+  clip=false,
+]
+\addplot[fill=gsm, draw=none] coordinates {(verb,0.640)[0.64] (sc,0.954)[0.95] (verif,0.641)[0.64] (avg,0.953)[0.95]};
+\addplot[fill=hot, draw=none] coordinates {(verb,0.623)[0.62] (sc,0.693)[0.69] (verif,0.577)[0.58] (avg,0.708)[0.71]};
+\addlegendentry{GSM8K}\addlegendentry{HotpotQA}
+\addlegendimage{legend image code/.code={\draw[dashed, line width=3pt, chancegray] (0mm,1mm) -- (14mm,1mm);}}
+\addlegendentry{chance (0.5)}
+\draw[dashed, line width=3pt, chancegray] ({rel axis cs:0,0}|-{axis cs:verb,0.5}) -- ({rel axis cs:1,0}|-{axis cs:verb,0.5});
+\end{axis}
+\end{tikzpicture}\par}
+\vfill
+\sub{(c) Test accuracy (\%)}
+{\centering\fsTab
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textit{Self-critique} & \multicolumn{2}{c}{GSM8K} & \multicolumn{2}{c}{HotpotQA}\\
+\cmidrule(lr){2-3}\cmidrule(l){4-5}
+Method & Acc & $p$ & Acc & $p$\\
+\midrule
+Never revise   & 92.5 & --    & 58.8 & --\\
+Always revise  & 92.3 & 1.00  & 55.0 & 0.006\\
+Majority vote  & \textbf{95.5} & 0.004 & \textbf{60.0} & 0.383\\
+IoE            & 93.0 & 0.500 & 57.3 & 0.070\\
+Best gate (dev)\textsuperscript{\textdagger} & 92.5 & 1.00 & 58.8 & 1.00\\
+Oracle         & 92.5 & 1.00  & 60.3 & 0.031\\
+\bottomrule
+\end{tabular}\par}
+\vspace{1mm}{\fsCap $p$ vs.\ never revise (McNemar). \textdagger\,All gates tie.\par}
+\vfill
+\sub{(d) Majority vote as the revision step}
+{\centering\fsTab
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Dataset & Fixes & Breaks & $\kappa$ & $\Ssc$ gate\\
+\midrule
+GSM8K    & 14 ($f{=}0.47$) & 3  & 0.21 & 92.5\,\%\\
+HotpotQA & 18 & 14 & 0.78 & 59.5\,\%\\
+\bottomrule
+\end{tabular}\par}
+\vspace{1mm}
+\begin{tcolorbox}[panel]
+\begin{minipage}[c]{0.49\linewidth}\centering{\fsKey\color{accenttext}59.56\,\%}\par{\fsCap predicted by the model}\end{minipage}\hfill
+\begin{minipage}[c]{0.49\linewidth}\centering{\fsKey\color{accenttext}59.50\,\%}\par{\fsCap observed on HotpotQA}\end{minipage}
+\end{tcolorbox}
+\vfill
+\sub{(e) Verdict on the hypotheses}
+\verdict{\badgeno}{\textbf{H1}: no dev-tuned gate beats never-revise}
+\verdict{\badgeyes}{\textbf{H2}: AUROC $\Ssc$ 0.95 / 0.69; $\Sv$, $\Sf$ ${\le}\,0.64$}
+\verdict{\badgeyes}{\textbf{H3}: ceiling 0 / 1.5 points, never exceeded}
+\vfill
+\sub{(f) Unexpected outcomes}
+\bul{GSM8K: self-critique changed only 2 of 500}
+\bul{GSM8K: P(True) near 0 even when correct}
+\vfill
+\sub{(g) Limitations}
+\bul{One 7B model; 400 test questions each}
+\bul{One revision prompt; dev split of 100}
+\end{minipage}
+\end{tcolorbox}
+\end{minipage}}
+
+% ===================== TAKE-HOME =====================
+\sbox{\boxTake}{\begin{tcolorbox}[enhanced, width=554mm, height=\takeH, colback=accent, colframe=accent, boxrule=0pt, arc=8mm, valign=center, halign=center]
+{\fontsize{40}{48}\selectfont\bfseries\color{white} Take-home: the bottleneck is the revision step, not the gate.}
+\end{tcolorbox}}
+
+% ===================== PLACEMENT =====================
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[headerblue] (current page.north west) rectangle ([yshift=-\headH]current page.north east);
+  \node[anchor=north west, inner sep=0pt] at ([xshift=\margin, yshift=-15mm]current page.north west) {\usebox{\boxHead}};
+  \node[anchor=east, fill=white, rounded corners=4mm, inner sep=4mm] at ([xshift=-\margin, yshift=-0.5\headH]current page.north east)
+    {\qrcode[height=80mm]{\repo}};
+  \node[anchor=north west, inner sep=0pt] at ([xshift=\margin, yshift=-\headH-\gap]current page.north west) {\usebox{\boxA}};
+  \node[anchor=north west, inner sep=0pt] at ([xshift=\margin+\wA+\gap, yshift=-\headH-\gap]current page.north west) {\usebox{\boxB}};
+  \node[anchor=north west, inner sep=0pt] at ([xshift=\margin+\wA+\wB+2\gap, yshift=-\headH-\gap]current page.north west) {\usebox{\boxC}};
+  \node[anchor=south west, inner sep=0pt] at ([xshift=\margin, yshift=\margin]current page.south west) {\usebox{\boxTake}};
+\end{tikzpicture}
+
+\end{frame}
+\end{document}

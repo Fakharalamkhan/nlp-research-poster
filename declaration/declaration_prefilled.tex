@@ -1,0 +1,26 @@
+% Fills in the known fields of the official declaration form (declaration_form_blank.pdf).
+% Programme, examiner, place/date and signature are left for the author to complete by hand.
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{pdfpages}
+\usepackage{tikz}
+
+% Coordinates in PDF points (bp) measured from the top-left corner of the form.
+\newcommand{\at}[3]{\node[anchor=base west, inner sep=0pt, font=\fontsize{10}{12}\selectfont]
+  at ([xshift=#1bp, yshift=-#2bp]current page.north west) {#3};}
+
+\begin{document}
+\includepdf[pages=1, fitpaper, pagecommand={\thispagestyle{empty}%
+  \begin{tikzpicture}[remember picture, overlay]
+    \at{166}{212}{Khan, Fakhr E Alam}
+    \at{166}{240}{1818211}
+    \at{130}{409.5}{Knowing When to Revise: Confidence-Gated Self-Correction in LLMs (research poster)}
+    \at{336}{535.5}{NLP module, research poster}
+    % tick for "other examination achievement for module"
+    \draw[line width=1.2pt] ([xshift=72.2bp, yshift=-535.2bp]current page.north west)
+      -- ([xshift=74.4bp, yshift=-538.2bp]current page.north west)
+      -- ([xshift=78.8bp, yshift=-531.0bp]current page.north west);
+  \end{tikzpicture}}]{declaration_form_blank.pdf}
+\end{document}

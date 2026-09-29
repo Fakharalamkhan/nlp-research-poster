@@ -1,0 +1,75 @@
+% Appendix to the research poster:
+%   1. References: complete list of all sources consulted ([1]-[10] are cited on the poster
+%      with the same numbers; [11]-[15] were consulted for the study but are not cited on the poster).
+%   2. Use of generative AI tools (the declaration requires these to be listed by product name).
+%   3. Declaration of Academic Integrity (pre-filled form here; the signed form is merged
+%      only by make_submission.sh, so the signature never enters the repository).
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage[numbers]{natbib}
+\usepackage{pdfpages}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\urlstyle{same}
+
+% Name of the bibliography heading
+\renewcommand{\refname}{References}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries Knowing When to Revise: Confidence-Gated Self-Correction in LLMs}\\[2mm]
+{\large Appendix to the research poster}\\[2mm]
+Fakhr E Alam Khan \quad Matriculation No.\ 1818211 \quad University of Trier\\[1mm]
+Code, data and results: \url{https://github.com/Fakharalamkhan/confidence-gated-self-correction}
+\end{center}
+
+\noindent References [1]--[10] are cited on the poster with the same numbers. References [11]--[15] were
+also consulted for the study (and are cited in the accompanying term paper) but are not cited on the poster.
+
+% The order of \nocite fixes the numbering.
+\nocite{huang2024cannot}          % [1]  problem
+\nocite{kamoi2024when}            % [2]  problem
+\nocite{li2024confidence}         % [3]  IoE
+\nocite{yang2024confidence}       % [4]  confidence vs. critique
+\nocite{kadavath2022language}     % [5]  P(True)
+\nocite{wang2023selfconsistency}  % [6]  self-consistency
+\nocite{cobbe2021gsm8k}           % [7]  GSM8K dataset
+\nocite{yang2018hotpotqa}         % [8]  HotpotQA dataset
+\nocite{qwen2025qwen25}           % [9]  model technical report
+\nocite{kwon2023vllm}             % [10] inference engine
+\nocite{madaan2023selfrefine}     % [11] consulted
+\nocite{shinn2023reflexion}       % [12] consulted
+\nocite{stechly2023gpt4}          % [13] consulted
+\nocite{xiong2024can}             % [14] consulted
+\nocite{fawcett2006roc}           % [15] consulted
+
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\section*{Use of Generative AI Tools}
+As required by the declaration below, the generative AI tools used for this poster and the
+underlying study are listed here with their product names.
+
+\begin{itemize}
+  \item \textbf{Claude Code} (Anthropic), model Claude Opus 5.5: used to prepare and check the code
+  repository, to adjust the analysis scripts (rounding of table values, figure layout), to edit the
+  wording and layout of the term paper, and to draft the layout, text and charts of this poster and
+  appendix from the author's term paper and results.
+\end{itemize}
+
+\noindent No generative AI tool was used to produce data, labels or reported numbers. All numbers on
+the poster come from the logged experiment outputs in the repository. All AI-generated content was
+reviewed and revised by the author, who takes full responsibility for it.
+
+\clearpage
+% The repository version uses the pre-filled, unsigned form. make_submission.sh builds a separate
+% copy (outside the repository) with \declfile set to the signed form.
+\providecommand{\declfile}{declaration/declaration_prefilled.pdf}
+\includepdf[pages=-, fitpaper]{\declfile}
+
+\end{document}

@@ -1,0 +1,19 @@
+# LaTeX build files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+
+# Signed declaration and submission builds: personal, never commit
+declaration/declaration_signed.pdf
+appendix_submission.*
+*.zip
+
+# Scratch
+_patch.py
+__pycache__/
