@@ -7,7 +7,8 @@ pdflatex -interaction=nonstopmode -halt-on-error poster.tex > /dev/null
 pdflatex -interaction=nonstopmode -halt-on-error poster.tex > /dev/null
 echo "poster:   errors $(grep -c '^!' poster.log || true), overfull $(grep -c 'Overfull' poster.log || true)"
 
-(cd declaration && pdflatex -interaction=nonstopmode -halt-on-error declaration_prefilled.tex > /dev/null)
+# two passes: the filled-in fields are placed with an overlay that needs the page position from pass 1
+(cd declaration && for i in 1 2; do pdflatex -interaction=nonstopmode -halt-on-error declaration_prefilled.tex > /dev/null; done)
 
 pdflatex -interaction=nonstopmode -halt-on-error appendix.tex > /dev/null
 bibtex appendix > /dev/null
