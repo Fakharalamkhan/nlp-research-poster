@@ -1,0 +1,63 @@
+================================================================================
+ SANITY CHECK REPORT: Model=qwen, Dataset=gsm8k (N=20)
+================================================================================
+
+[1] LEAK Check: PASS
+    Gold leaks detected in S_verif prompt: 0/20
+    Printing 2 sample S_verif prompts:
+    --- Example 1 ---
+    | Question: John has 3 boxes.  Each box is 5 inches by 6 inches by 4 inches.  The walls are 1 inch thick.  What is the total inner volume of all 3 boxes?
+    | Proposed answer: 72
+    | Is the proposed answer correct?
+    | (A) True
+    | (B) False
+    | Answer with the letter only.
+    --- Example 2 ---
+    | Question: Lee used to be able to run the 400-meter hurdles two seconds faster than Gerald would run the 400-meter hurdles.  But Gerald changed his diet, which improved his speed by 10%.  If Lee runs the 400-meter hurdles in 38 seconds, how fast can Gerald, with his improved diet, run the 400-meter h
+    | ... [truncated] ...
+    | 
+    | Proposed answer: 36
+    | Is the proposed answer correct?
+    | (A) True
+    | (B) False
+    | Answer with the letter only.
+
+[2] S_verif Alignment with A0: PASS
+    Mismatches between A0 extracted answer and verif proposed answer: 0
+
+[3] ID Alignment: PASS
+    Total records: 20, Unique IDs: 20
+
+[4] Random Baseline AUROC: PASS
+    Random AUROC vs Y0: 0.4167 (Expected in [0.35, 0.65])
+
+[5] Self-Consistency Agreement Examples (3 samples):
+    --- Example 1 (ID: gsm8k-test-106) ---
+    A0 answer: 72
+    10 sample answers: ['72', '72', '72', '72', '72', '72', '72', '72', '72', '72']
+    S_sc10 agreement: 1.00
+    --- Example 2 (ID: gsm8k-test-93) ---
+    A0 answer: 36
+    10 sample answers: ['36', '36', '36', '36', '36', '36', '36', '36', '36', '36']
+    S_sc10 agreement: 1.00
+    --- Example 3 (ID: gsm8k-test-65) ---
+    A0 answer: 36
+    10 sample answers: ['36', '36', '36', '36', '36', '36', '36', '36', '36', '36']
+    S_sc10 agreement: 1.00
+
+[6] Parse Failures:
+    S_verb parse failures: 0/20
+    S_verif parse failures: 0/20
+
+[7] Timing & Projected Compute:
+    Mean latency per question: 8.82 seconds
+    Projected full-run time (500 questions): 1.23 GPU-hours
+    Status: PASS
+
+[8] Sample Diversity Check (S_sc): PASS
+    Questions with all 10 raw sample texts identical: 0/20 (0.0%, threshold <= 50.0%)
+    Distribution of distinct extracted answers per question: [1 distinct: 13, 2 distinct: 5, 3 distinct: 2]
+
+================================================================================
+ OVERALL VERDICT: ALL PASS
+================================================================================

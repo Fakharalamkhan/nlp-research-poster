@@ -1,0 +1,8 @@
+Answer the question using the paragraphs below. Think step by step. At the end, write your answer on a new line as:
+Final answer: <answer>
+The answer should be a short span (a name, date, number, or yes/no).
+
+Paragraphs:
+{context}
+
+Question: {question}

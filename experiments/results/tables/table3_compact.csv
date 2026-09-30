@@ -1,0 +1,14 @@
+Method,GSM8K Acc (%),GSM8K Rev (%),GSM8K p vs Never,HotpotQA Acc (%),HotpotQA Rev (%),HotpotQA p vs Never
+Never,92.5,0.0,--,58.8,0.0,--
+Always,92.3,100.0,1.00,55.0,100.0,0.006
+Majority vote,95.5,5.5,0.004,60.0,11.5,0.383
+IoE,93.0,1.0,0.500,57.3,6.5,0.070
+Gate verb,92.5,0.0,1.00,58.8,0.0,1.00
+Gate verb (hindsight)*,92.5,0.0,1.00,58.8,0.0,1.00
+Gate sc10,92.5,0.0,1.00,58.8,4.8,1.00
+Gate sc10 (hindsight)*,92.5,0.0,1.00,59.5,9.0,0.250
+Gate verif,92.5,0.0,1.00,58.8,0.0,1.00
+Gate verif (hindsight)*,92.5,0.0,1.00,58.8,0.0,1.00
+Gate avg,92.5,0.0,1.00,58.8,2.3,1.00
+Gate avg (hindsight)*,92.5,0.0,1.00,59.5,10.5,0.250
+Oracle,92.5,7.5,1.00,60.3,41.3,0.031

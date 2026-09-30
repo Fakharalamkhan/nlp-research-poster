@@ -1,0 +1,8 @@
+Question: {question}
+Paragraphs:
+{context}
+Proposed answer: {extracted_A0_answer}
+Is the proposed answer correct?
+(A) True
+(B) False
+Answer with the letter only.

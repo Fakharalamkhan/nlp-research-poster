@@ -1,0 +1,4 @@
+Solve the following problem step by step. At the end, write your answer on a new line as:
+Final answer: <answer>
+
+Problem: {question}

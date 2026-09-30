@@ -1,0 +1,9 @@
+Model,Dataset,Gate,tau*,TPR (t),FPR (u),Pred Acc (%),Obs Acc (%),Diff (%)
+\modelA{},GSM8K,$S_{\text{verb}}$,0.000,0.000,0.000,92.50,92.50,+0.00
+\modelA{},GSM8K,$S_{\text{sc10}}$,0.000,0.000,0.000,92.50,92.50,+0.00
+\modelA{},GSM8K,$S_{\text{verif}}$,0.000,0.000,0.000,92.50,92.50,+0.00
+\modelA{},GSM8K,$S_{\text{avg}}$,0.000,0.000,0.000,92.50,92.50,+0.00
+\modelA{},HotpotQA,$S_{\text{verb}}$,0.000,0.000,0.000,58.75,58.75,+0.00
+\modelA{},HotpotQA,$S_{\text{sc10}}$,0.100,0.103,0.009,58.86,58.75,-0.11
+\modelA{},HotpotQA,$S_{\text{verif}}$,0.000,0.000,0.000,58.75,58.75,+0.00
+\modelA{},HotpotQA,$S_{\text{avg}}$,0.425,0.055,0.000,58.83,58.75,-0.08

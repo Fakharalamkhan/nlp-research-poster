@@ -1,0 +1,67 @@
+================================================================================
+ SANITY CHECK REPORT: Model=qwen, Dataset=hotpotqa (N=20)
+================================================================================
+
+[1] LEAK Check: PASS
+    Gold leaks detected in S_verif prompt: 0/20
+    Printing 2 sample S_verif prompts:
+    --- Example 1 ---
+    | Question: How long did The Shire of Flinders, which encompassed the extremity of the Mornington Peninsula located south-east of Melbourne, Australia, exist?
+    | Paragraphs:
+    | Mornington Peninsula Regional Gallery: Mornington Peninsula Regional Gallery is a public art gallery on the Mornington Peninsula, s
+    | ... [truncated] ...
+    |  answer: 1994 - 1874
+    | Is the proposed answer correct?
+    | (A) True
+    | (B) False
+    | Answer with the letter only.
+    --- Example 2 ---
+    | Question: In what year was the most famous statute at Po Lin Monastery built?
+    | Paragraphs:
+    | Bagaya Monastery: The Bagaya Monastery (Burmese: ဘားဂရာ ကျောင်း ), located in Inwa, Mandalay Region, Burma (Myanmar) is a Buddhist monastery built on the southwest of Inwa Palace.  This magnificent monastery is
+    | ... [truncated] ...
+    | roposed answer: 1993
+    | Is the proposed answer correct?
+    | (A) True
+    | (B) False
+    | Answer with the letter only.
+
+[2] S_verif Alignment with A0: PASS
+    Mismatches between A0 extracted answer and verif proposed answer: 0
+
+[3] ID Alignment: PASS
+    Total records: 20, Unique IDs: 20
+
+[4] Random Baseline AUROC: PASS
+    Random AUROC vs Y0: 0.4949 (Expected in [0.35, 0.65])
+
+[5] Self-Consistency Agreement Examples (3 samples):
+    --- Example 1 (ID: 5abe34095542993f32c2a088) ---
+    A0 answer: 1994 - 1874
+    10 sample answers: ['120', '120', '120', '120', '120', '1994', '120 years', '1994', '120', '120']
+    S_sc10 agreement: 0.00
+    --- Example 2 (ID: 5a8b3de95542997f31a41cc3) ---
+    A0 answer: 1993
+    10 sample answers: ['1993', '1993', '1993', '1993', '1993', '1993', '1993', '1993', '1993', '1993']
+    S_sc10 agreement: 1.00
+    --- Example 3 (ID: 5a7557d75542992d0ec05f68) ---
+    A0 answer: Laurie Metcalf
+    10 sample answers: ['Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf', 'Laurie Metcalf']
+    S_sc10 agreement: 1.00
+
+[6] Parse Failures:
+    S_verb parse failures: 0/20
+    S_verif parse failures: 0/20
+
+[7] Timing & Projected Compute:
+    Mean latency per question: 7.87 seconds
+    Projected full-run time (500 questions): 1.09 GPU-hours
+    Status: PASS
+
+[8] Sample Diversity Check (S_sc): PASS
+    Questions with all 10 raw sample texts identical: 0/20 (0.0%, threshold <= 50.0%)
+    Distribution of distinct extracted answers per question: [1 distinct: 10, 2 distinct: 3, 3 distinct: 5, 4 distinct: 1, 6 distinct: 1]
+
+================================================================================
+ OVERALL VERDICT: ALL PASS
+================================================================================

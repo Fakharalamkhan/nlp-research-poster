@@ -17,3 +17,6 @@ appendix_submission.*
 # Scratch
 _patch.py
 __pycache__/
+
+# LaTeX side-output of the analysis scripts (not used by the poster)
+experiments/paper/

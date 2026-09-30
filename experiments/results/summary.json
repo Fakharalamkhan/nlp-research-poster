@@ -1,0 +1,124 @@
+{
+  "qwen_gsm8k": {
+    "a": 0.925,
+    "f": 0.0,
+    "b": 0.002702702702702703,
+    "kappa": Infinity,
+    "aurocs": {
+      "verb": 0.6400900900900901,
+      "sc5": 0.9292792792792792,
+      "sc10": 0.9544144144144144,
+      "verif": 0.6411711711711712,
+      "avg": 0.9533333333333334
+    },
+    "accuracies": {
+      "Never": 0.925,
+      "Always": 0.9225,
+      "Majority vote": 0.955,
+      "IoE": 0.93,
+      "Gate verb": 0.925,
+      "Gate verb (hindsight)*": 0.925,
+      "Gate sc10": 0.925,
+      "Gate sc10 (hindsight)*": 0.925,
+      "Gate verif": 0.925,
+      "Gate verif (hindsight)*": 0.925,
+      "Gate avg": 0.925,
+      "Gate avg (hindsight)*": 0.925,
+      "Oracle": 0.925
+    },
+    "tau_stars": {
+      "verb": 0.0,
+      "sc10": 0.0,
+      "sc5": 0.0,
+      "verif": 0.0,
+      "avg": 0.0
+    },
+    "hindsight": {
+      "verb": {
+        "tau": 0.0,
+        "acc": 0.925,
+        "pct_rev": 0.0,
+        "n_rev": 0
+      },
+      "sc10": {
+        "tau": 0.0,
+        "acc": 0.925,
+        "pct_rev": 0.0,
+        "n_rev": 0
+      },
+      "verif": {
+        "tau": 0.0,
+        "acc": 0.925,
+        "pct_rev": 0.0,
+        "n_rev": 0
+      },
+      "avg": {
+        "tau": 0.0,
+        "acc": 0.925,
+        "pct_rev": 0.0,
+        "n_rev": 0
+      }
+    }
+  },
+  "qwen_hotpotqa": {
+    "a": 0.5875,
+    "f": 0.03636363636363636,
+    "b": 0.08936170212765958,
+    "kappa": 3.500000000000001,
+    "aurocs": {
+      "verb": 0.6226950354609929,
+      "sc5": 0.6757704706640877,
+      "sc10": 0.6932043842682141,
+      "verif": 0.5769954867827208,
+      "avg": 0.7078014184397163
+    },
+    "accuracies": {
+      "Never": 0.5875,
+      "Always": 0.55,
+      "Majority vote": 0.6,
+      "IoE": 0.5725,
+      "Gate verb": 0.5875,
+      "Gate verb (hindsight)*": 0.5875,
+      "Gate sc10": 0.5875,
+      "Gate sc10 (hindsight)*": 0.595,
+      "Gate verif": 0.5875,
+      "Gate verif (hindsight)*": 0.5875,
+      "Gate avg": 0.5875,
+      "Gate avg (hindsight)*": 0.595,
+      "Oracle": 0.6025
+    },
+    "tau_stars": {
+      "verb": 0.0,
+      "sc10": 0.1,
+      "sc5": 0.2,
+      "verif": 0.0,
+      "avg": 0.425
+    },
+    "hindsight": {
+      "verb": {
+        "tau": 0.0,
+        "acc": 0.5875,
+        "pct_rev": 0.0,
+        "n_rev": 0
+      },
+      "sc10": {
+        "tau": 0.2,
+        "acc": 0.595,
+        "pct_rev": 9.0,
+        "n_rev": 36
+      },
+      "verif": {
+        "tau": 0.0,
+        "acc": 0.5875,
+        "pct_rev": 0.0,
+        "n_rev": 0
+      },
+      "avg": {
+        "tau": 0.575,
+        "acc": 0.595,
+        "pct_rev": 10.5,
+        "n_rev": 42
+      }
+    }
+  }
+}
